@@ -2,6 +2,8 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Queue
 
+1-3 are all constant 
+
 1. What is the runtime complexity of `enqueue`?
 
 2. What is the runtime complexity of `dequeue`?
@@ -29,6 +31,10 @@ Answer the following questions for each of the data structures you implemented a
 5. What is the runtime complexity of `get_max`?
 
 ## Doubly Linked List
+
+1-10 are all constant time
+
+10a - Delete is constant, JS array.splice can be linear in the worst case
 
 1. What is the runtime complexity of `ListNode.insert_after`?
 

@@ -5,7 +5,7 @@ from doubly_linked_list import DoublyLinkedList
 
 class Queue:
     def __init__(self):
-        self.size = 0
+        # self.size = 0
         self.storage = DoublyLinkedList()
         # Why is our DLL a good choice to store our elements?
         ''' 
@@ -17,15 +17,15 @@ class Queue:
         
     def enqueue(self, value):
         self.storage.add_to_head(value)
-        self.size = self.storage.length
+        # self.size = self.storage.length
 
     def dequeue(self):
         dequeued_value = self.storage.remove_from_tail()
-        self.size = self.storage.length
+        # self.size = self.storage.length
         return dequeued_value
 
     def len(self):
-        return self.size
+        return self.storage.length
 
 
 

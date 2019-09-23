@@ -51,6 +51,14 @@ class DoublyLinkedList:
     def __len__(self):
         return self.length
 
+    # notes on algorithm approaches
+    # 1. how to get middle value of linked list (halfway between beginning and end)
+    # use two vars. for each step send first two node ahead, send second one node ahead
+    # when first node is at end, second node will be halfway through list
+    # 2. how to reverse singly linked list
+    # create previous, current, and next variables
+    # reverse next pointer on the different nodes
+
     """Wraps the given value in a ListNode and inserts it 
     as the new head of the list. Don't forget to handle 
     the old head node's previous pointer accordingly."""
