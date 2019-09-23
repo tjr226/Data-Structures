@@ -1,3 +1,6 @@
+# import sys
+# sys.path.append('../')
+
 """Each ListNode holds a reference to its previous node
 as well as its next node in the List."""
 
@@ -67,6 +70,8 @@ class DoublyLinkedList:
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
+        if self.head is None:
+            return None
         if self.head.next:
             removed_head = self.head
             self.head = self.head.next
@@ -108,7 +113,9 @@ class DoublyLinkedList:
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
     def remove_from_tail(self):
-        if self.tail.prev is None:
+        if self.tail is None:
+            return None
+        elif self.tail.prev is None:
             prev_tail = self.tail
             self.head = None
             self.tail = None
