@@ -1,3 +1,6 @@
+from doubly_linked_list import ListNode
+from doubly_linked_list import DoublyLinkedList
+
 class LRUCache:
     """
     Our LRUCache class keeps track of the max number of nodes it
@@ -7,7 +10,9 @@ class LRUCache:
     to every node stored in the cache.
     """
     def __init__(self, limit=10):
-        pass
+        self.limit = limit
+        self.dll = DoublyLinkedList()
+        self.hashmap = {}
 
     """
     Retrieves the value associated with the given key. Also
@@ -17,7 +22,19 @@ class LRUCache:
     key-value pair doesn't exist in the cache.
     """
     def get(self, key):
-        pass
+        print(f"incoming key for GET is {key}")
+        if key not in self.hashmap:
+            return None
+        else:
+            # move node with key to front of DLL
+            # first, need to find that node
+            iter_node = self.dll.head
+            while key != iter_node.value:
+                iter_node = iter_node.next
+            # move that node to the front
+            self.dll.move_to_front(iter_node)
+            # return value from key in hashmap
+            return self.hashmap[key]
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -30,4 +47,33 @@ class LRUCache:
     the newly-specified value.
     """
     def set(self, key, value):
-        pass
+        if key in self.hashmap:
+            # when key/value already in hashmap
+            # overwrite old key/value pair in hashmap
+            self.hashmap[key] = value
+            # move key to front of DLL
+            # iterate through DLL to find the node matching the key
+            iter_node = self.dll.head
+            while key != iter_node.value:
+                iter_node = iter_node.next
+            # move that node to the front
+            self.dll.move_to_front(iter_node)
+            # explicitly return None to avoid problems
+            return None
+
+        # cases when key is not in hashmap (cache)
+        if self.dll.length < self.limit:
+            # case: key is not in hashmap, room left in cache
+            # add key/value to both DLL and hashmap
+            self.hashmap[key] = value
+            self.dll.add_to_head(key)
+            # explicitly return None to avoid problems
+            return None
+        elif self.dll.length == self.limit:
+            # case: key is not in hashmap, also DLL is full
+            # delete tail value from DLL and hashmap
+            prev_key = self.dll.remove_from_tail()
+            del self.hashmap[prev_key]
+            # add key/value to both DLL and hashmap
+            self.hashmap[key] = value
+            self.dll.add_to_head(key)        
