@@ -73,11 +73,18 @@ class HeapTests(unittest.TestCase):
         self.assertTrue(self.heap._bubble_up.called)
 
     def test_sift_down_was_called(self):
-        self.heap._sift_down = MagicMock()
+        # self.heap._sift_down = MagicMock()
         self.heap.insert(10)
         self.heap.insert(11)
+        self.heap.insert(4)
+        self.heap.insert(5)
+        self.heap.insert(6)
+        
         self.heap.delete()
-        self.assertTrue(self.heap._sift_down.called)
+        # self.assertTrue(self.heap._sift_down.called)
+
+        # code Tim Rooney added
+        self.assertEqual(self.heap.get_max(), 10)
 
 
 if __name__ == '__main__':

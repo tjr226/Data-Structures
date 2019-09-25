@@ -12,6 +12,9 @@ Answer the following questions for each of the data structures you implemented a
 
 ## Binary Search Tree
 
+all are O(log n)
+this assumes that, on average, the tree is balanced
+
 1. What is the runtime complexity of `insert`? 
 
 2. What is the runtime complexity of `contains`?
