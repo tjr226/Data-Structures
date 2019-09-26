@@ -25,13 +25,23 @@ this assumes that, on average, the tree is balanced
 
 1. What is the runtime complexity of `_bubble_up`?
 
+log n
+
 2. What is the runtime complexity of `_sift_down`?
+
+log n
 
 3. What is the runtime complexity of `insert`?
 
+log n
+
 4. What is the runtime complexity of `delete`?
 
+log n
+
 5. What is the runtime complexity of `get_max`?
+
+constant
 
 ## Doubly Linked List
 
