@@ -29,7 +29,7 @@ class AVLTree:
 
         if self.node != None: 
             print ('-' * level * 2, pref, self.node.key,
-                   f'[{self.height}:{self.balance}]',
+                   f'[height {self.height}: balance {self.balance}]',
                    'Leaf' if self.height == 0 else ' ')
             if self.node.left != None:
                 self.node.left.display(level + 1, '<')
@@ -77,9 +77,11 @@ class AVLTree:
         right_height = 0
 
         if self.node.left:
-            left_height = self.node.left.update_height()
+            left_height = self.node.left.update_height() + 1
         if self.node.right:
-            right_height = self.node.right.update_height()
+            right_height = self.node.right.update_height() + 1
+        
+        # print("left height", left_height, "right height", right_height)
 
         self.balance = left_height - right_height
 
@@ -171,8 +173,10 @@ test_tree.display()
 # print(test_tree.node.left.node.key)
 test_tree.insert(2)
 test_tree.display()
-print(test_tree.node.left.node.key)
-print(test_tree.node.left.node.left.node.key)
+# print(test_tree.node.left.node.key)
+# print(test_tree.node.left.node.left.node.key)
+# print(test_tree.height)
+# test_tree.update_balance()
 # test_tree.insert(6)
 # print(test_tree.node.right.node.key)
 # test_tree.display()
