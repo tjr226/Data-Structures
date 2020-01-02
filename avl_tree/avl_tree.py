@@ -30,24 +30,24 @@ class AVLTree:
         if self.node != None: 
             print ('-' * level * 2, pref, self.node.key,
                    f'[{self.height}:{self.balance}]',
-                   'L' if self.height == 0 else ' ')
+                   'Leaf' if self.height == 0 else ' ')
             if self.node.left != None:
                 self.node.left.display(level + 1, '<')
             if self.node.right != None:
                 self.node.right.display(level + 1, '>')
 
-    def display_no_update(self, level=0, pref=''):
-        # self.update_height()  # Update height before balancing
-        # self.update_balance()
+    # def display_no_update(self, level=0, pref=''):
+    #     # self.update_height()  # Update height before balancing
+    #     # self.update_balance()
 
-        if self.node != None: 
-            print ('-' * level * 2, pref, self.node.key,
-                    f'[{self.height}:{self.balance}]',
-                    'L' if self.height == 0 else ' ')
-            if self.node.left != None:
-                self.node.left.display_no_update(level + 1, '<')
-            if self.node.right != None:
-                self.node.right.display_no_update(level + 1, '>')
+    #     if self.node != None: 
+    #         print ('-' * level * 2, pref, self.node.key,
+    #                 f'[{self.height}:{self.balance}]',
+    #                 'Leaf' if self.height == 0 else ' ')
+    #         if self.node.left != None:
+    #             self.node.left.display_no_update(level + 1, '<')
+    #         if self.node.right != None:
+    #             self.node.right.display_no_update(level + 1, '>')
 
     """
     Computes the maximum number of levels there are
@@ -97,7 +97,8 @@ class AVLTree:
         # assign new parent tree
         self.node.right = new_parent_tree
         # remove old right side from old parent
-        new_left_tree.node.right = None
+        
+        new_left_tree.node.right = new_parent_tree.node.left
         # add to new parent
         self.node.right.node.left = new_left_tree
 
@@ -116,7 +117,7 @@ class AVLTree:
         # assign new parent tree
         self.node.left = new_parent_tree
         # remove old left side from old parent
-        new_right_tree.node.left = None
+        new_right_tree.node.left = new_parent_tree.node.right
         # add to new parent
         self.node.left.node.right = new_right_tree
 
@@ -157,15 +158,21 @@ class AVLTree:
 
         self.update_balance()
 
+
         # print(f"self balance is {self.balance}")
         if self.balance > 1 or self.balance < -1:
             # print("out of balance", self.balance)
             self.rebalance()
 
-# test_tree = AVLTree(Node(5))
-# test_tree.insert(3)
+test_tree = AVLTree(Node(5))
+test_tree.display()
+test_tree.insert(3)
+test_tree.display()
 # print(test_tree.node.left.node.key)
-# test_tree.insert(2)
+test_tree.insert(2)
+test_tree.display()
+print(test_tree.node.left.node.key)
+print(test_tree.node.left.node.left.node.key)
 # test_tree.insert(6)
 # print(test_tree.node.right.node.key)
 # test_tree.display()
@@ -179,6 +186,5 @@ class AVLTree:
 # test_tree.display()
 
 # test_tree.node.left.display()
-# print(test_tree.calculate_height())
 # print(test_tree.height)
-# print(test_tree.node.right.calculate_height())
+# print(test_tree.node.right.height)
