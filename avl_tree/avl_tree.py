@@ -81,6 +81,7 @@ class AVLTree:
         if self.node.right:
             right_height = self.node.right.update_height() + 1
         
+
         # print("left height", left_height, "right height", right_height)
 
         self.balance = left_height - right_height
@@ -110,18 +111,37 @@ class AVLTree:
     of the new parent. 
     """
     def right_rotate(self):
-        # print("before right rotate")
-        # self.display_no_update()
-        # set up vars
-        new_right_tree = self.node.left
-        new_parent_tree = new_right_tree.node.left
+        # this only works with 2 left nodes (i.e. inserting 5, 3, then 2 into a binary search tree)
+        print("before right rotate")
+
+        # the new right node will be the current parent node
+        new_right_tree = self
+        print(new_right_tree.node.key)
+        
+        # the new parent node will be the left node of the current parent node
+        new_parent_tree = self.node.left
+        print(new_parent_tree.node.key)
 
         # assign new parent tree
-        self.node.left = new_parent_tree
+        self = new_parent_tree
+        print(self.node.key)
+
+        #
+        self.node.right = new_right_tree
+        print(self.node.right.node.key)
+
         # remove old left side from old parent
-        new_right_tree.node.left = new_parent_tree.node.right
-        # add to new parent
-        self.node.left.node.right = new_right_tree
+        print(self.node.right.node.left.node.key)
+        self.node.right.node.left = None
+
+
+        print("new self", self.node.key)
+        self.display()
+
+
+        # new_right_node.node.left = new_parent_node.node.right
+        # # add to new parent
+        # self.node.left.node.right = new_right_node
 
 
     """
@@ -171,6 +191,7 @@ test_tree.display()
 test_tree.insert(3)
 test_tree.display()
 # print(test_tree.node.left.node.key)
+print("before inserting two")
 test_tree.insert(2)
 test_tree.display()
 # print(test_tree.node.left.node.key)
